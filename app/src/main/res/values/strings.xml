@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">学习园地</string>
+    <string name="button_plus"> 加法</string>
+    <string name="button_minus">减法</string>
+    <string name="button_multiply">乘法</string>
+    <string name="button_divide">除法</string>
+    <string name="button_gallery">放松一下</string>
+    <string name="button_answer">回答</string>
+    <string name="current_level">级别</string>
+    <string name="current_round">轮次</string>
+    <string name="reward_pref">荣誉</string>
+    <string name="answer_correct">正确</string>
+    <string name="answer_incorrect">错误，再试试</string>
+    <string name="answer_missing">忘了答题，再试试</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
