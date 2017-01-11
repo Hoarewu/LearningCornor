@@ -19,8 +19,6 @@
         <activity
             android:name="com.hoarewu.learningcornor.course.math.MathMainActivity"
             android:windowSoftInputMode="stateVisible"></activity>
-        <activity android:name="com.hoarewu.learningcornor.course.math.reward.RewardActivity" />
-        <activity android:name="com.hoarewu.learningcornor.course.math.reward.GalleryActivity"></activity>
         <activity android:name="com.hoarewu.learningcornor.game.AirBattle.AirBattleActivity"
             android:label="AirBattle">
         </activity>

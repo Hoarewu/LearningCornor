@@ -5,19 +5,23 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 
 import com.hoarewu.learningcornor.course.math.MathMainActivity;
 import com.hoarewu.learningcornor.course.math.problem.AdditionProblem;
 import com.hoarewu.learningcornor.course.math.problem.DivisionProblem;
 import com.hoarewu.learningcornor.course.math.problem.MultiplicationProblem;
 import com.hoarewu.learningcornor.course.math.problem.SubstractionProblem;
-import com.hoarewu.learningcornor.course.math.reward.GalleryActivity;
 import com.hoarewu.learningcornor.game.AirBattle.AirBattleActivity;
 import com.hoarewu.learningcornor.util.ToastRenderer;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String PROBLEM_CLASS = "problem_class";
+    private int level = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,19 @@ public class MainActivity extends AppCompatActivity {
         final LearningCornor app = (LearningCornor)getApplication();
         final TextView txtview = (TextView) this.findViewById(R.id.textView2);
         txtview.setText(app.getEnergyPoints()+"");
+    }
+
+    public void setLevel(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        String[] levelList = new String[] {"Level 1","Level 2", "Level 3", "Level 4"};
+
+        builder.setTitle("当前级别: "+ level );
+        builder.setItems(levelList, new OnClickListener(){
+              public void onClick(DialogInterface dialog, int which) {
+                 level = which + 1;
+                }
+            });
+        builder.show();
     }
 
     public void startPlus(View view) {
@@ -59,11 +76,6 @@ public class MainActivity extends AppCompatActivity {
     public void startDivide(View view) {
         Intent intent = new Intent(this, MathMainActivity.class);
         intent.putExtra(PROBLEM_CLASS, DivisionProblem.class.getName());
-        startActivity(intent);
-    }
-
-    public void showGallery(View view) {
-        Intent intent = new Intent(this, GalleryActivity.class);
         startActivity(intent);
     }
 

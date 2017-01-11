@@ -13,7 +13,7 @@ public class AirBattleActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gam_airbattle);
+        setContentView(R.layout.activity_game_airbattle);
         gameView = (GameView)findViewById(R.id.gameView);
         //0:combatAircraft
         //1:explosion

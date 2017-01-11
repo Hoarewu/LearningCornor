@@ -27,7 +27,7 @@ public class MathMainActivity extends AppCompatActivity {
     private Levels levels;
     private MathProblem currentProblem;
     private Levels.Level currentLevel;
-    private int currentRound = 0;
+    private int currentRound = 0; 
     private int correctNum =0;
     private int savedLevel = 0;
     private String problemClass;
