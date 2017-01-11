@@ -1,8 +1,7 @@
 package com.hoarewu.learningcornor.course.math;
 
-import com.google.common.base.Preconditions;
-
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -10,33 +9,28 @@ import java.util.List;
  */
 public class Levels {
 
-    private List<Level> levels = new ArrayList<>();
-    private int currentLevel = 5;
+    private static List<Level> levels = new ArrayList<Level>(
+        Arrays.asList(
+                new Level(1, 10),
+                new Level(2, 20),
+                new Level(3, 50),
+                new Level(4, 100),
+                new Level(5, 1000)));
 
-    public Levels() {
-        levels.add(new Level(1, 10));
-        levels.add(new Level(2, 10));
-        levels.add(new Level(3, 20));
-        levels.add(new Level(4, 20));
-        levels.add(new Level(5, 50));
-        levels.add(new Level(6, 50));
-        levels.add(new Level(7, 100));
+    private static int levelNo = 3;
+    public static int maxLevel = 5;
+
+    public static void setLevelNo(int level) {
+        if ((level > 0) & (level <= maxLevel))
+            levelNo = level;
     }
 
-    public Level getNextLevel() {
-        Preconditions.checkState(hasNextLevel(), "There are no more levels!");
-        currentLevel++;
-        return levels.get(currentLevel);
+    public static int getLevelNo() {
+        return levelNo;
     }
 
-    public boolean hasNextLevel() {
-        return currentLevel + 1 < levels.size();
-    }
-
-    public Level getLevel(int levelNo) {
-        Preconditions.checkState(levelNo > 0, "Level to get most be a positive number!");
-        currentLevel = levelNo - 1;
-        return levels.get(currentLevel);
+    public static Level getCurrentLevel() {
+        return levels.get(levelNo - 1);
     }
 
     public static class Level {

@@ -6,11 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 
 import com.hoarewu.learningcornor.course.math.MathMainActivity;
+import com.hoarewu.learningcornor.course.math.Levels;
 import com.hoarewu.learningcornor.course.math.problem.AdditionProblem;
 import com.hoarewu.learningcornor.course.math.problem.DivisionProblem;
 import com.hoarewu.learningcornor.course.math.problem.MultiplicationProblem;
@@ -21,7 +21,6 @@ import com.hoarewu.learningcornor.util.ToastRenderer;
 public class MainActivity extends AppCompatActivity {
 
     public static final String PROBLEM_CLASS = "problem_class";
-    private int level = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +43,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void setLevel(View view){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        String[] levelList = new String[] {"Level 1","Level 2", "Level 3", "Level 4"};
+        String[] levelList = new String[Levels.maxLevel];
+        for (int i = 0; i< Levels.maxLevel; i++) {
+            int levelName = i +1;
+            levelList[i] = levelName + "";
+        }
 
-        builder.setTitle("当前级别: "+ level );
+        builder.setTitle("当前级别: "+ Levels.getLevelNo());
         builder.setItems(levelList, new OnClickListener(){
               public void onClick(DialogInterface dialog, int which) {
-                 level = which + 1;
+                  Levels.setLevelNo(which + 1);
                 }
             });
         builder.show();

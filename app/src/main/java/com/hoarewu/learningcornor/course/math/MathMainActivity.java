@@ -24,17 +24,14 @@ public class MathMainActivity extends AppCompatActivity {
     private ProblemFactory problemFactory;
     private SharedPreferences sharedPref;
 
-    private Levels levels;
     private MathProblem currentProblem;
     private Levels.Level currentLevel;
     private int currentRound = 0; 
     private int correctNum =0;
-    private int savedLevel = 0;
     private String problemClass;
 
     public MathMainActivity() {
         this.toast = new ToastRenderer();
-        this.levels = new Levels();
         this.problemFactory = new ProblemFactory();
     }
 
@@ -45,16 +42,9 @@ public class MathMainActivity extends AppCompatActivity {
         this.problemClass = getIntent().getStringExtra(MainActivity.PROBLEM_CLASS);
         sharedPref = getPreferences(Context.MODE_PRIVATE);
 
-        currentRound = sharedPref.getInt(getString(R.string.current_round) + problemClass, 0);
-        savedLevel = sharedPref.getInt(getString(R.string.current_level) + problemClass, 0);
-
-        if (currentRound == 0 && savedLevel == 0) {
-            gotoNextLevel();
-        } else {
-            currentLevel = levels.getLevel(savedLevel);
-            currentProblem = problemFactory.createFor(problemClass, currentLevel.bound);
-            renderProblem();
-        }
+        currentLevel = Levels.getCurrentLevel();
+        currentProblem = problemFactory.createFor(problemClass, currentLevel.bound);
+        renderProblem();
     }
 
     private void renderProgress() {
@@ -67,21 +57,11 @@ public class MathMainActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        gotoNextLevel();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        saveProgress();
-    }
-
-    private void gotoNextLevel() {
-        if (!levels.hasNextLevel()) {
-            return;
-        }
-        currentLevel = levels.getNextLevel();
-        showNextProblem();
     }
 
     public void showNextProblem() {
@@ -111,10 +91,7 @@ public class MathMainActivity extends AppCompatActivity {
     }
 
     private void saveProgress() {
-        SharedPreferences.Editor prefEditor = sharedPref.edit();
-        prefEditor.putInt("LeveL" + problemClass, currentLevel.index);
-        prefEditor.putInt("Round" + problemClass, currentRound);
-        prefEditor.commit();
+
     }
 
     private void renderProblem() {
@@ -137,7 +114,6 @@ public class MathMainActivity extends AppCompatActivity {
         } else {
             toast.show(getApplicationContext(), "错误");
             showNextProblem();
-            //renderProblem();
         }
     }
 
